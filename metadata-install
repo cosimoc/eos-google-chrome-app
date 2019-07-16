@@ -1,0 +1,14 @@
+#!/bin/bash
+
+ar x chrome.deb
+tar xf data.tar.xz
+
+install -d /app/share/applications
+cp usr/share/applications/google-chrome.desktop /app/share/applications
+
+install -d /app/share/appdata
+cp usr/share/appdata/google-chrome.appdata.xml /app/share/appdata
+for icon_size in 64 128; do install -d /app/share/icons/hicolor/${icon_size}x${icon_size}/apps; install -m644 opt/google/chrome/product_logo_${icon_size}.png /app/share/icons/hicolor/${icon_size}x${icon_size}/apps/google-chrome.png; done
+
+desktop-file-edit --set-key "StartupWMClass" --set-value "google-chrome" /app/share/applications/google-chrome.desktop
+desktop-file-edit --set-key "Exec" --set-value "google-chrome-launcher" /app/share/applications/google-chrome.desktop

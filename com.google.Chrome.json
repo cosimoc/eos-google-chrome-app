@@ -23,7 +23,7 @@
     ],
     "modules": [
         {
-            "name": "google-chrome-launcher",
+            "name": "google-chrome-metadata",
             "buildsystem": "simple",
             "sources": [
                 {
@@ -32,43 +32,23 @@
                 },
                 {
                     "type": "file",
-                    "url": "https://raw.githubusercontent.com/chromium/chromium/68.0.3440.84/chrome/installer/linux/common/desktop.template",
-                    "sha256": "0ed6e52311026e0f4e98d7f94832eddf59f0b9d5114551f5e9ad886050f48d21",
+                    "url": "https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_76.0.3809.100-1_amd64.deb",
+                    "sha256": "1dbf606dfa051a927fbd9a241a9032148d25be0851b2f27849a26ca81fa6b9b0",
+                    "dest-filename": "chrome.deb",
                     "dest": "metadata"
                 },
                 {
                     "type": "file",
-                    "url": "https://raw.githubusercontent.com/chromium/chromium/68.0.3440.84/chrome/installer/linux/common/google-chrome/google-chrome.appdata.xml.template",
-                    "sha256": "053cdc185c4687ad93b32b4725619993104e5cf16134adaf493327b089fd3098",
-                    "dest": "metadata"
-                },
-                {
-                    "type": "file",
-                    "url": "https://raw.githubusercontent.com/chromium/chromium/68.0.3440.84/chrome/installer/linux/common/google-chrome/google-chrome.info",
-                    "sha256": "f41cd84a84956ff339e7c0fd2e730d18ad2d712eb67c986bfe5f66c8d1c17084",
-                    "dest": "metadata"
-                },
-                {
-                    "type": "file",
-                    "path": "metadata-writer",
-                    "dest": "metadata"
-                },
-                {
-                    "type": "file",
-                    "path": "product_logo_64.png"
-                },
-                {
-                    "type": "file",
-                    "path": "product_logo_128.png"
+                    "dest": "metadata",
+                    "path": "metadata-install"
                 }
+
             ],
             "build-commands": [
                 "install -d /app/bin",
                 "install google-chrome-launcher /app/bin/google-chrome-launcher",
-                "chmod +x metadata/metadata-writer",
-                "cd metadata && ./metadata-writer",
-
-                "for icon_size in 64 128; do install -d /app/share/icons/hicolor/${icon_size}x${icon_size}/apps; install -m644 product_logo_${icon_size}.png /app/share/icons/hicolor/${icon_size}x${icon_size}/apps/google-chrome.png; done"
+                "chmod +x metadata/metadata-install",
+                "cd metadata && ./metadata-install"
             ]
         },
         {
